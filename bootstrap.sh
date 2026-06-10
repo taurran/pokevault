@@ -2,14 +2,19 @@
 # PokeVault bootstrap (macOS / Linux)
 # Installs the vault and wires its skills into your coding agent(s).
 #
-#   ./bootstrap.sh [VAULT_ROOT]     # default: ~/PokeVault/Vault
+#   ./bootstrap.sh [VAULT_ROOT]     # default: ~/PokeVault
 #
 # Safe + idempotent: never overwrites your knowledge. Re-run anytime to resync skills.
 set -euo pipefail
 
 PKG="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_VAULT="$HOME/PokeVault/Vault"
+# Default to ~/PokeVault (home dir — NOT ~/Documents or ~/Desktop, which can be iCloud-synced).
+DEFAULT_VAULT="$HOME/PokeVault"
 VAULT="${1:-}"
+
+echo "PokeVault bootstrap"
+echo "  package : $PKG"
+echo
 
 # Choose the install location. An explicit argument always wins. Otherwise, when run
 # interactively, offer the default and accept a custom path (press Enter to accept).
@@ -26,13 +31,11 @@ fi
 # Expand a leading ~ if the user typed one.
 VAULT="${VAULT/#\~/$HOME}"
 
-echo "PokeVault bootstrap"
-echo "  package : $PKG"
 echo "  vault   : $VAULT"
 echo
 
 # 1) Place the vault on first run; never clobber an existing one.
-#    Default location: ~/PokeVault/Vault  (macOS: /Users/<you>/PokeVault/Vault, Linux: /home/<you>/PokeVault/Vault)
+#    Default location: ~/PokeVault  (macOS: /Users/<you>/PokeVault, Linux: /home/<you>/PokeVault)
 if [ ! -d "$VAULT" ]; then
   if [ -d "$PKG/vault" ]; then
     echo "→ creating vault at $VAULT"

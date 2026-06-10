@@ -49,7 +49,7 @@ This vault contains four zones plus one shared daily note:
 A single **daily note** at the vault root (`daily/`) is the shared capture surface for *both* work
 and personal — see "The single daily note" below.
 
-Zones are top-level folders inside the Obsidian vault root (`~/PokeVault/Vault/`). Also at the root:
+Zones are top-level folders inside the Obsidian vault root (`~/PokeVault/`). Also at the root:
 `daily/` (the shared daily note + its template — **visible**; your journal/capture surface).
 `research/` (the **research workshop** — folder-per-project investigation; **visible**; findings are
 promoted into a wiki when ready, §8). Two more top-level folders are **not** knowledge and are
@@ -575,7 +575,7 @@ notes is a deliberate act, never an automatic one.
 > `docs/01-vault-blueprint.md` (ships alongside the vault, not inside it) adds rationale.
 
 ```
-# Vault root: ~/PokeVault/Vault/
+# Vault root: ~/PokeVault/
 second-brain/profile/
 second-brain/initiatives/
 second-brain/artifacts/

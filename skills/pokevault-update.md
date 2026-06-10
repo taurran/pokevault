@@ -1,11 +1,11 @@
 ---
 name: pokevault-update
-description: "Apply a newer PokeVault release into an existing ~/PokeVault/Vault WITHOUT disturbing user content. Updates the engine, docs, skills, and templates; adds new structure; merges new config keys; never touches knowledge, raw, profile, state, or user config values."
+description: "Apply a newer PokeVault release into an existing ~/PokeVault WITHOUT disturbing user content. Updates the engine, docs, skills, and templates; adds new structure; merges new config keys; never touches knowledge, raw, profile, state, or user config values."
 trigger: "update my vault"
 when_to_use: "When a new PokeVault version ships and you want its improvements deployed into a vault that already has your data."
 inputs:
   - name: vault_root
-    description: "The live vault to update. Default ~/PokeVault/Vault."
+    description: "The live vault to update. Default ~/PokeVault."
     required: false
   - name: release_path
     description: "Path to the new PokeVault release (the kit's vault/ template + docs/ + skills/)."

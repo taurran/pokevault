@@ -1,6 +1,6 @@
 ==============================================================================
  PokeVault  -  a portable "Second Brain + LLM Wiki" you carry to any machine
- Version 1.0.0
+ Version 1.1.0
 ==============================================================================
 
 WHAT IT IS
@@ -17,31 +17,32 @@ query the wiki, not the pile; never overwrite, never forget.
 
 INSTALL (about 60 seconds)
 ------------------------------------------------------------------------------
-1. GET IT - download the ZIP (recommended)
+1. GET IT
+   Clone (recommended - easiest to update later):
+     git clone https://github.com/taurran/pokevault.git && cd pokevault
+   Or download the ZIP (no git needed) and extract it:
      https://github.com/taurran/pokevault/archive/refs/heads/master.zip
-   One file, the whole kit. Extract it WHEREVER you want it to live (your
-   home folder, a Tools/ directory, anywhere - you choose where it goes),
-   then open the extracted pokevault folder in a terminal.
-   (Prefer git? You can: git clone https://github.com/taurran/pokevault.git)
 
-2. RUN THE BOOTSTRAP  (places the vault + wires skills into your AI agent;
-   safe and idempotent - re-run anytime)
+2. RUN THE BOOTSTRAP  (installs the vault into a local folder + wires skills;
+   safe and idempotent - re-run anytime; asks where to install)
    macOS / Linux:   ./bootstrap.sh
    Windows:         .\bootstrap.ps1
+     (if blocked "not digitally signed", first run this once for the session:
+      Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force)
    Custom path:     ./bootstrap.sh ~/Knowledge
-                    .\bootstrap.ps1 -VaultRoot D:\Knowledge
+                    .\bootstrap.ps1 -VaultRoot D:\Vaults\PokeVault
    The bootstrap prints the final vault path on completion - point Obsidian
    at it.
 
    OR LET YOUR AI AGENT RUN IT - point your assistant at this folder and paste:
      "Run the PokeVault bootstrap in this folder: execute ./bootstrap.sh (macOS/Linux)
-      or .\bootstrap.ps1 (Windows) to install the vault to ~/PokeVault/Vault and wire its skills.
-      Then open ~/PokeVault/Vault, read AGENTS.md, and tell me when it's ready."
+      or .\bootstrap.ps1 (Windows) to install the vault to ~/PokeVault and wire its skills.
+      Then open ~/PokeVault, read AGENTS.md, and tell me when it's ready."
 
    Default vault location:
-     macOS    /Users/<you>/PokeVault/Vault
-     Linux    /home/<you>/PokeVault/Vault
-     Windows  %USERPROFILE%\PokeVault\Vault
+     macOS    /Users/<you>/PokeVault
+     Linux    /home/<you>/PokeVault
+     Windows  C:\PokeVault
 
 3. OPEN IN OBSIDIAN
    Don't have Obsidian? Download it free (official): https://obsidian.md/download
@@ -59,9 +60,9 @@ INSTALL (about 60 seconds)
 
 WHAT THE BOOTSTRAP DOES
 ------------------------------------------------------------------------------
-1. Copies vault/ to ~/PokeVault/Vault (skips if one exists - never clobbers your data).
-2. Installs skills to ~/PokeVault/Vault/toolkit/skills/<name>.md (tool-neutral source).
-3. Generates Claude Code bindings at ~/PokeVault/Vault/.claude/skills/<name>/SKILL.md.
+1. Copies vault/ to ~/PokeVault (skips if one exists - never clobbers your data).
+2. Installs skills to ~/PokeVault/toolkit/skills/<name>.md (tool-neutral source).
+3. Generates Claude Code bindings at ~/PokeVault/.claude/skills/<name>/SKILL.md.
 4. Confirms the engine (AGENTS.md) and per-tool pointers are in place.
 
 

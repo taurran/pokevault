@@ -1,15 +1,23 @@
 # PokeVault bootstrap (Windows PowerShell)
 # Installs the vault and wires its skills into your coding agent(s).
 #
-#   .\bootstrap.ps1 [-VaultRoot <path>]   # default: %USERPROFILE%\PokeVault\Vault
+#   .\bootstrap.ps1 [-VaultRoot <path>]   # default: C:\PokeVault
 #
 # Safe + idempotent: never overwrites your knowledge. Re-run anytime to resync skills.
+#
+# If PowerShell blocks this ("not digitally signed"), allow scripts for THIS session only:
+#   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 param(
   [string]$VaultRoot
 )
 $ErrorActionPreference = 'Stop'
 $Pkg = Split-Path -Parent $MyInvocation.MyCommand.Path
-$DefaultVault = Join-Path $env:USERPROFILE 'PokeVault\Vault'
+# Default to a LOCAL drive-root folder, deliberately NOT under %USERPROFILE%\Documents
+# (which is often redirected into OneDrive — two sync engines on one vault cause conflicts).
+$DefaultVault = Join-Path $env:SystemDrive 'PokeVault'
+
+Write-Host "PokeVault bootstrap"
+Write-Host "  package : $Pkg`n"
 
 # Choose the install location. -VaultRoot always wins. Otherwise, when run interactively,
 # offer the default and accept a custom path (press Enter to accept). Obsidian later holds
@@ -23,17 +31,15 @@ if (-not $VaultRoot) {
     }
   } catch { }
 }
-
-Write-Host "PokeVault bootstrap"
-Write-Host "  package : $Pkg"
 Write-Host "  vault   : $VaultRoot`n"
 
 # 1) Place the vault on first run; never clobber an existing one.
-#    Default location: %USERPROFILE%\PokeVault\Vault
+#    Default location: C:\PokeVault
 if (-not (Test-Path $VaultRoot)) {
   if (Test-Path (Join-Path $Pkg 'vault')) {
     Write-Host "-> creating vault at $VaultRoot"
-    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $VaultRoot) | Out-Null
+    $parent = Split-Path -Parent $VaultRoot
+    if ($parent -and -not (Test-Path $parent)) { New-Item -ItemType Directory -Force -Path $parent | Out-Null }
     Copy-Item -Recurse (Join-Path $Pkg 'vault') $VaultRoot
   } else {
     Write-Error "no vault\ in package and no existing $VaultRoot - aborting"; exit 2

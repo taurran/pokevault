@@ -4,7 +4,7 @@ Welcome. This is your **Second Brain + LLM Wiki** — a portable, Obsidian-nativ
 raw material you collect gets compiled by an AI assistant into persistent, interlinked notes
 that compound over time.
 
-**Open this folder (`~/PokeVault/Vault/`) as an Obsidian vault.**
+**Open this folder (`~/PokeVault/`) as an Obsidian vault.**
 
 ## How it works (30 seconds)
 
@@ -42,4 +42,4 @@ instead of hiding them, and treats your raw files as read-only. Your knowledge i
   - `02-llm-wiki-synthesis-and-daily-notes.md` — how the wiki, synthesis, and daily notes work.
 
   If you want them inside the vault for offline reference, copy the kit's `docs/` folder to
-  `~/PokeVault/Vault/docs/`.
+  `~/PokeVault/docs/`.

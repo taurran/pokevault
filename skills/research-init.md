@@ -8,7 +8,7 @@ inputs:
     description: "Human-readable name for the research project."
     required: true
   - name: vault_root
-    description: "Vault root path. Default ~/PokeVault/Vault."
+    description: "Vault root path. Default ~/PokeVault."
     required: false
 harness_notes: "Harness-agnostic. Requires file-create + folder-create. An external harness may set the harness: field in the generated frontmatter."
 ---
@@ -20,7 +20,7 @@ Scaffolds a research project per the structure defined in `AGENTS.md` §5 (resea
 
 ### Steps
 
-1. **Resolve vault root.** Use `vault_root` input or default `~/PokeVault/Vault`. Resolve `~`.
+1. **Resolve vault root.** Use `vault_root` input or default `~/PokeVault`. Resolve `~`.
    Slugify `project_name`: lowercase, replace spaces with hyphens, strip non-alphanumeric except
    hyphens.
 

@@ -5,7 +5,7 @@ trigger: "initialize my vault"
 when_to_use: "First-time setup on a new machine, or to re-create any missing structural files without disturbing existing content."
 inputs:
   - name: vault_root
-    description: "Where to create the vault. Default ~/PokeVault/Vault (macOS/Linux) or %USERPROFILE%\\PokeVault\\Vault (Windows)."
+    description: "Where to create the vault. Default ~/PokeVault (macOS/Linux) or C:\PokeVault (Windows)."
     required: false
   - name: owner
     description: "Your name; substituted for [OWNER] in seeded files."
@@ -20,7 +20,7 @@ only creates what's missing. Safe to re-run.
 
 ### Steps
 
-1. **Resolve root.** Use `vault_root` or default `~/PokeVault/Vault`. Resolve `~`/`%USERPROFILE%`.
+1. **Resolve root.** Use `vault_root` or default `~/PokeVault`. Resolve `~`/`%USERPROFILE%`.
 2. **Idempotency check.** If `<root>/.vault/config.yaml` exists, this is a repair run: preserve
    everything; only create missing files/folders. Otherwise a fresh build.
 3. **Create folders** (no-op if present) from the blueprint:

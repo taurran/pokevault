@@ -16,19 +16,26 @@ Obsidian, install a few plugins, and tell your AI assistant where the schema is.
 
 ## 1. Place the vault
 
-Pick a location **outside** any cloud-sync folder if you plan to use Obsidian Sync or git (see §5).
+Pick a **local** location **outside** any cloud-sync folder (OneDrive / iCloud / Dropbox) if you plan to
+use Obsidian Sync or git (see §5) — two sync engines on one vault cause conflicts and corrupt `.obsidian`.
+
+- **Windows:** the bootstrap defaults to **`C:\PokeVault`** for exactly this reason — your `Documents`
+  folder is usually redirected into OneDrive. A drive-root local folder keeps the vault off the sync
+  engine and easy to find. (Pass `-VaultRoot <path>` if `C:\` is locked down on your machine.)
+- **macOS / Linux:** the default **`~/PokeVault`** sits in your home dir, not the iCloud-synced
+  `~/Documents`/`~/Desktop`, so it's safe as-is.
 
 **macOS / Linux**
 ```bash
-cp -R PokeVault/vault ~/PokeVault/Vault
+cp -R PokeVault/vault ~/PokeVault
 ```
 
 **Windows (PowerShell)**
 ```powershell
-Copy-Item -Recurse PokeVault\vault $env:USERPROFILE\PokeVault\Vault
+Copy-Item -Recurse PokeVault\vault C:\PokeVault
 ```
 
-The folder name (`Vault`) becomes the Obsidian vault display name. Rename if you like.
+The folder name (`PokeVault`) becomes the Obsidian vault display name. Rename if you like.
 
 > **Easiest path — one command (recommended).** Instead of copying by hand, run the bootstrap from
 > the unzipped package. It places the vault *and* wires the skills into your coding agent(s):
@@ -42,7 +49,7 @@ The folder name (`Vault`) becomes the Obsidian vault display name. Rename if you
 >
 > Pass a path to install elsewhere: `./bootstrap.sh ~/Knowledge`. It's safe to re-run (idempotent) and
 > never overwrites your content. Or build from scratch with your assistant: open `skills/vault-init.md`
-> and say "initialize my vault at ~/PokeVault/Vault".
+> and say "initialize my vault at ~/PokeVault".
 
 ---
 
@@ -60,7 +67,7 @@ has `created: null` — the `vault-init` skill stamps it on first run, or you ca
 
 ## 3. Open in Obsidian
 
-1. Launch Obsidian → **Open folder as vault** → select `~/PokeVault/Vault`.
+1. Launch Obsidian → **Open folder as vault** → select `~/PokeVault`.
 2. The shipped `.obsidian/` config applies automatically (absolute links, ignore filters, Daily Notes).
 3. Install recommended **community plugins** (Settings → Community plugins → turn off **Restricted
    Mode**, then **Browse**). Obsidian requires you to install these yourself:
@@ -84,22 +91,22 @@ Point your assistant at the schema. It's the same schema for every tool — only
 
 | Tool | What to do |
 |---|---|
-| **Claude Code** | Open `~/PokeVault/Vault` as the project; it reads `CLAUDE.md` → `AGENTS.md`. |
-| **Cursor** | Open `~/PokeVault/Vault`; it reads `.cursorrules` → `AGENTS.md`. |
+| **Claude Code** | Open `~/PokeVault` as the project; it reads `CLAUDE.md` → `AGENTS.md`. |
+| **Cursor** | Open `~/PokeVault`; it reads `.cursorrules` → `AGENTS.md`. |
 | **Codex / OpenCode** | Reads `AGENTS.md` natively. |
-| **Desktop AI app / local LLM** | Add `~/PokeVault/Vault` as an indexed folder; tell it to read `AGENTS.md` first. |
+| **Desktop AI app / local LLM** | Add `~/PokeVault` as an indexed folder; tell it to read `AGENTS.md` first. |
 
 ### How your skills are wired
 `bootstrap.sh` installs the kit's skills in two shapes so every tool can find them:
-- **Canonical source** — `~/PokeVault/Vault/toolkit/skills/<name>.md` (plain Markdown, readable by any agent).
-- **Claude Code** — `~/PokeVault/Vault/.claude/skills/<name>/SKILL.md` (the open Agent-Skills format; one folder
+- **Canonical source** — `~/PokeVault/toolkit/skills/<name>.md` (plain Markdown, readable by any agent).
+- **Claude Code** — `~/PokeVault/.claude/skills/<name>/SKILL.md` (the open Agent-Skills format; one folder
   per skill, `SKILL.md` singular). Claude auto-loads a skill when your request matches its
-  `description`. Just open `~/PokeVault/Vault` as the project.
+  `description`. Just open `~/PokeVault` as the project.
 - **Codex / Cursor / Gemini / Aider / Windsurf / Zed** — these read `AGENTS.md` natively; the skill
   catalog + trigger phrases live in **AGENTS.md §11**, so the agent opens `toolkit/skills/<name>.md`
   on demand.
 - **Want skills available everywhere in Claude Code?** Copy the `<name>/` folders from
-  `~/PokeVault/Vault/.claude/skills/` to `~/.claude/skills/` (personal scope) instead of leaving them in-vault.
+  `~/PokeVault/.claude/skills/` to `~/.claude/skills/` (personal scope) instead of leaving them in-vault.
 
 > Re-run `./bootstrap.sh` after any kit update to resync the `.claude/skills/` bindings.
 
@@ -112,14 +119,18 @@ Then test:
 
 ## 5. Sync & backup (choose ONE primary sync)
 
-- **Obsidian Sync / Syncthing / git:** keep the vault at `~/PokeVault/Vault`, **outside** OneDrive / iCloud /
+**This desktop vault is the source of truth — seed sync FROM it.** Turn your sync engine on *here* first
+(it uploads this vault); then on your phone or another machine, connect to the **same** remote and it
+**downloads** a copy. You never re-create the vault on the other device — it always flows out from here.
+
+- **Obsidian Sync / Syncthing / git:** keep the vault at `~/PokeVault`, **outside** OneDrive / iCloud /
   Dropbox / Google Drive. Two sync engines on the same files cause conflicts and corrupt `.obsidian`.
 - **Cloud-folder backup only (no cross-device editing):** a cloud folder is fine, but set the files
   to **"always keep on this device"** (Windows OneDrive: right-click → *Always keep on this device*;
   macOS iCloud: disable *Optimize Storage*) so Obsidian sees real local files.
 - **git (recommended either way):**
   ```bash
-  cd ~/PokeVault/Vault && git init && git add . && git commit -m "Initial vault"
+  cd ~/PokeVault && git init && git add . && git commit -m "Initial vault"
   ```
   The shipped `.gitignore` tracks your knowledge + shared Obsidian config and ignores OS cruft,
   Obsidian workspace/cache, plugin binaries, and `projects/`/`scratch/` content.
@@ -184,6 +195,7 @@ Say **"start research \<name\>"** to scaffold a project folder under `research/`
 
 | Symptom | Fix |
 |---|---|
+| Windows: `.ps1` won't run ("not digitally signed") | Allow scripts for the session only, then re-run: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force`. |
 | Cross-zone `[[links]]` don't resolve | Settings → Files & Links → New link format = **Absolute**. |
 | `projects/`/`scratch/` clutter the explorer | Confirm `.obsidian/app.json` `userIgnoreFilters` applied; reopen vault. |
 | Assistant edits raw files | Re-point it at `AGENTS.md`; §9 forbids writing to `raw/`. |

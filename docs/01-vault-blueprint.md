@@ -38,12 +38,12 @@ Three properties make it portable and durable:
 
 ## 2. Where to put the vault (placement best practice)
 
-The vault root is **`~/PokeVault/Vault/`** by convention. You can name it anything; the folder name becomes
+The vault root is **`~/PokeVault/`** by convention. You can name it anything; the folder name becomes
 the Obsidian vault display name.
 
-**macOS / Linux:** `~/PokeVault/Vault` (i.e., `/Users/<you>/PokeVault/Vault` or `/home/<you>/PokeVault/Vault`).
+**macOS / Linux:** `~/PokeVault` (i.e., `/Users/<you>/PokeVault` or `/home/<you>/PokeVault`).
 
-**Windows:** `%USERPROFILE%\PokeVault\Vault` (i.e., `C:\Users\<you>\Vault`).
+**Windows:** `C:\PokeVault` (a local, drive-root folder — deliberately *not* under `Documents`, which is usually OneDrive-synced).
 
 ### Cloud sync vs. Obsidian Sync — choose one primary
 
@@ -52,7 +52,7 @@ This matters and trips people up:
 - If you sync the vault with **Obsidian Sync** (or Syncthing / git), **do not also put it inside a
   cloud-synced folder** like OneDrive, iCloud Drive, Dropbox, or Google Drive. Two sync engines
   fighting over the same files create conflict copies and corrupt `.obsidian` state. Put the vault
-  at `~/PokeVault/Vault` (outside any cloud folder) and let one sync tool own it.
+  at `~/PokeVault` (outside any cloud folder) and let one sync tool own it.
 - If you have **no cross-device sync** and just want a backup, a cloud folder is fine — but expect
   a sync icon on the folder, and prefer "keep on device" so files are always local (Obsidian needs
   real local files, not cloud placeholders).
@@ -60,14 +60,14 @@ This matters and trips people up:
   this device** to prevent dehydration.
 
 **Recommended for the disconnected-but-Obsidian-synced machine this kit targets:** install at
-`~/PokeVault/Vault`, enable Obsidian Sync (or git), and keep it out of OneDrive/iCloud.
+`~/PokeVault`, enable Obsidian Sync (or git), and keep it out of OneDrive/iCloud.
 
 ---
 
 ## 3. Complete folder structure (annotated)
 
 ```
-~/PokeVault/Vault/                                ← Obsidian vault root (open THIS)
+~/PokeVault/                                ← Obsidian vault root (open THIS)
 │
 ├── AGENTS.md                           ← the wiki engine: schema every assistant reads
 ├── CLAUDE.md                           ← Claude Code entry point → AGENTS.md
@@ -485,12 +485,12 @@ assistant that can read and write files in this folder is a valid wiki maintaine
 
 On a fresh machine with nothing but this file:
 
-1. Create `~/PokeVault/Vault/` and the tree in §3 (or run the `vault-init` skill in `skills/`).
+1. Create `~/PokeVault/` and the tree in §3 (or run the `vault-init` skill in `skills/`).
 2. Drop in `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, `README.md`.
 3. Seed `.obsidian/` (§4) and `.vault/` (config + empty `manifest.json`/`pending.json` per zone).
 4. Seed each `wiki/` with `index.md`, `log.md`, `review.md` and the empty `raw/`+`pages/` buckets.
 5. Seed `second-brain/profile/` with the 7 stubs; replace `[OWNER]` / `[INSTALL_DATE]`.
-6. Open `~/PokeVault/Vault/` in Obsidian; install the recommended community plugins; verify link settings.
+6. Open `~/PokeVault/` in Obsidian; install the recommended community plugins; verify link settings.
 7. Point your AI assistant at `AGENTS.md` and drop your first source into a `raw/inbox/`.
 
 That's the whole system. Everything after that is just feeding it.
