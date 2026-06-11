@@ -1,6 +1,6 @@
 ==============================================================================
  PokeVault  -  a portable "Second Brain + LLM Wiki" you carry to any machine
- Version 1.1.0
+ Version 1.1.1
 ==============================================================================
 
 WHAT IT IS
@@ -88,7 +88,7 @@ THE FOUR ZONES
 second-brain/  your self-model (profile/) + personal knowledge wiki
 work/          projects, deliverables, records + work knowledge wiki
 personal/      life management - people (CRM), areas, goals, calendar + a personal-life wiki
-toolkit/       your own skills, agents, context
+toolkit/       your own skills (by category), agents, agent-sops, context
 
 One shared daily/ note is the front door: capture freely, your assistant routes
 each note to the right zone (anything ambiguous goes to daily/review.md for

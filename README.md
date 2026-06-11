@@ -118,13 +118,16 @@ pokevault/
 ├── README.md            ← you are here (the install guide)
 ├── README.txt           ← plain-text quickstart (same steps, no formatting)
 ├── INSTALL.md           ← detailed setup: Obsidian, sync/backup, updates, troubleshooting
-├── VERSION              ← 1.1.0
+├── VERSION              ← 1.1.1
 ├── bootstrap.sh         ← one-command installer (macOS/Linux)
 ├── bootstrap.ps1        ← one-command installer (Windows)
 ├── docs/
 │   ├── 01-vault-blueprint.md                    ← structure, Obsidian compat, frontmatter, taxonomy
 │   └── 02-llm-wiki-synthesis-and-daily-notes.md ← the LLM-wiki pattern, synthesis, daily notes
-├── skills/              ← the wiring skills (installed into the vault by bootstrap)
+├── skills/              ← the wiring skills, by category (installed into the vault by bootstrap)
+│   ├── 01-foundations/  ← vault-init, obsidian-setup, profile-build, pokevault-update
+│   ├── 02-research/     ← research-init, research-promote
+│   └── 08-knowledge/    ← wiki-ingest, wiki-lint, daily-note
 └── vault/               ← THE vault (bootstrap copies this to ~/PokeVault)
     ├── AGENTS.md         ← the engine: the schema every AI assistant reads
     ├── CLAUDE.md  .cursorrules  ← per-tool entry points → AGENTS.md
@@ -142,7 +145,7 @@ pokevault/
 | `second-brain/` | Your self-model (`profile/`) + personal knowledge wiki | ✅ |
 | `work/` | Projects, deliverables, records + work knowledge wiki | ✅ |
 | `personal/` | Life management — people (CRM), areas, goals, calendar + a personal-life wiki | ✅ (hybrid) |
-| `toolkit/` | Your own skills, agents, context files | — |
+| `toolkit/` | Your own skills (by category), agents, agent-sops (multi-step procedures), context files | — |
 
 One shared **`daily/`** note is the frictionless front door: capture work + personal freely, and your
 assistant routes each fragment to the right zone (logging anything ambiguous to `daily/review.md` for
@@ -175,17 +178,17 @@ finding is solid, *"promote research"* compiles it into the curated wiki with fu
 Nine tool-neutral skills ship in `skills/` and install into your vault. Trigger them by phrase, or tell
 any assistant *"Read `toolkit/skills/<category>/<name>.md` and follow it."*
 
-| Skill | Say | What it does |
-|---|---|---|
-| `vault-init` | *"initialize my vault"* | Scaffold a fresh vault — folders, engine, config, seeds. Idempotent; repairs a partial vault. |
-| `profile-build` | *"build my profile"* | Interview you to fill the `second-brain/profile/` cognitive-fingerprint files. |
-| `obsidian-setup` | *"set up obsidian"* | Install the recommended plugins and verify the link/ignore settings the wiki needs. |
-| `daily-note` | *"open today's note"* | Open the shared daily note; route end-of-day captures to the right zones. |
-| `wiki-ingest` | *"process my inbox"* | Compile new `raw/` sources into interlinked wiki pages — dedup, route, cite, flag contradictions. |
-| `wiki-lint` | *"lint my wiki"* | Health-check a zone's wiki: orphans, stale index entries, broken links, duplicates, consolidation. |
-| `research-init` | *"start research &lt;name&gt;"* | Scaffold a research project folder from the template. |
-| `research-promote` | *"promote research"* | Compile a ready finding into the curated wiki, with provenance. |
-| `pokevault-update` | *"update my vault"* | Apply a newer release into your vault without touching your data. |
+| Skill | Category | Say | What it does |
+|---|---|---|---|
+| `vault-init` | `01-foundations` | *"initialize my vault"* | Scaffold a fresh vault — folders, engine, config, seeds. Idempotent; repairs a partial vault. |
+| `profile-build` | `01-foundations` | *"build my profile"* | Interview you to fill the `second-brain/profile/` cognitive-fingerprint files. |
+| `obsidian-setup` | `01-foundations` | *"set up obsidian"* | Install the recommended plugins and verify the link/ignore settings the wiki needs. |
+| `pokevault-update` | `01-foundations` | *"update my vault"* | Apply a newer release into your vault without touching your data. |
+| `research-init` | `02-research` | *"start research &lt;name&gt;"* | Scaffold a research project folder from the template. |
+| `research-promote` | `02-research` | *"promote research"* | Compile a ready finding into the curated wiki, with provenance. |
+| `wiki-ingest` | `08-knowledge` | *"process my inbox"* | Compile new `raw/` sources into interlinked wiki pages — dedup, route, cite, flag contradictions. |
+| `wiki-lint` | `08-knowledge` | *"lint my wiki"* | Health-check a zone's wiki: orphans, stale index entries, broken links, duplicates, consolidation. |
+| `daily-note` | `08-knowledge` | *"open today's note"* | Open the shared daily note; route end-of-day captures to the right zones. |
 
 ---
 
