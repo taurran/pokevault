@@ -1,5 +1,7 @@
 ---
 name: profile-build
+version: "1.0.0"
+category: 01-foundations
 description: "Interview the user to fill in the second-brain cognitive-fingerprint files (identity, voice, preferences, goals, relationships, projects, patterns) so assistants can personalize responses."
 trigger: "build my profile"
 when_to_use: "Soon after setup, and whenever your role, voice, goals, or priorities shift."

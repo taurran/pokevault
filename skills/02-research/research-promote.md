@@ -1,5 +1,7 @@
 ---
 name: research-promote
+version: "1.0.0"
+category: 02-research
 description: "Compile a ready research finding or a vault:promote-tagged item into the curated wiki, with full provenance. Frontmatter-driven."
 trigger: "promote research"
 when_to_use: "A finding has status: ready, user asks to promote, or a research loop just completed. Also responds to 'promote this'."

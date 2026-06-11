@@ -1,5 +1,7 @@
 ---
 name: pokevault-update
+version: "1.0.0"
+category: 01-foundations
 description: "Apply a newer PokeVault release into an existing ~/PokeVault WITHOUT disturbing user content. Updates the engine, docs, skills, and templates; adds new structure; merges new config keys; never touches knowledge, raw, profile, state, or user config values."
 trigger: "update my vault"
 when_to_use: "When a new PokeVault version ships and you want its improvements deployed into a vault that already has your data."

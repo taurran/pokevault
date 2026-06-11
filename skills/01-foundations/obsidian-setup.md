@@ -1,5 +1,7 @@
 ---
 name: obsidian-setup
+version: "1.0.0"
+category: 01-foundations
 description: "Open the vault in Obsidian, install the recommended community plugins, and verify the link/ignore settings that the wiki depends on."
 trigger: "set up obsidian"
 when_to_use: "Once per machine, after the vault folder exists."

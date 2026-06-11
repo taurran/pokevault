@@ -1,5 +1,7 @@
 ---
 name: daily-note
+version: "1.0.0"
+category: 08-knowledge
 description: "Create or open the single daily note (work + personal), and at end-of-day route its captures to the right zones (CRM, areas, goals, calendar, wiki)."
 trigger: "open today's note"
 when_to_use: "Start of day to capture; end of day (or weekly) to harvest captures into the wiki."

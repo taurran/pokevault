@@ -1,5 +1,7 @@
 ---
 name: vault-init
+version: "1.0.0"
+category: 01-foundations
 description: "Scaffold a fresh PokeVault knowledge vault on this machine — folders, engine files, .obsidian config, .vault state, profile stubs, and wiki seeds. Idempotent. Use on a new machine or to repair a partial vault."
 trigger: "initialize my vault"
 when_to_use: "First-time setup on a new machine, or to re-create any missing structural files without disturbing existing content."

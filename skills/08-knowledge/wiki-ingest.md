@@ -1,5 +1,7 @@
 ---
 name: wiki-ingest
+version: "1.0.0"
+category: 08-knowledge
 description: "Compile new raw sources in a zone's wiki/raw/ into interlinked wiki pages, following the AGENTS.md schema. Dedups, routes, flags contradictions, updates index + log."
 trigger: "process my inbox"
 when_to_use: "After dropping one or more sources into a zone's wiki/raw/{inbox,meetings,notes,media}/."

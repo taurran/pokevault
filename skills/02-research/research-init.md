@@ -1,5 +1,7 @@
 ---
 name: research-init
+version: "1.0.0"
+category: 02-research
 description: "Scaffold a new research project folder from the template. Idempotent — re-running repairs missing pieces without overwriting existing content."
 trigger: "start research <name>"
 when_to_use: "Beginning a new investigation or research project."

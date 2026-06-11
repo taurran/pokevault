@@ -1,5 +1,7 @@
 ---
 name: wiki-lint
+version: "1.0.0"
+category: 08-knowledge
 description: "Run health checks on a zone's wiki: orphans, stale index entries, broken wikilinks, near-duplicates, unresolved contradictions, pending backlog, low-confidence aging, consolidation candidates."
 trigger: "lint my wiki"
 when_to_use: "Periodically — after ~10 ingests or monthly. Also before a big query session."
