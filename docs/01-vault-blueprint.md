@@ -119,7 +119,13 @@ This matters and trips people up:
 │
 ├── toolkit/                            ← ZONE: YOUR AI ADDITIONS (private, no wiki)
 │   ├── README.md
-│   ├── skills/   agents/   context/
+│   ├── skills/                         ←   skills by category: <NN-category>/<name>.md (see §3.5)
+│   │   ├── 01-foundations/
+│   │   ├── 02-research/
+│   │   └── 08-knowledge/
+│   ├── agents/
+│   ├── agent-sops/                     ←   multi-step agent procedures (SOPs) tying skills + agents together
+│   └── context/
 │
 ├── daily/                              ← the ONE shared daily note (work + personal) — visible
 │   ├── index.md                        ←   chronological journal index (pattern detection)
@@ -207,6 +213,31 @@ Every file with structured metadata uses YAML frontmatter (`---` fences). The fu
 - **Timestamps** — single-quoted ISO-8601 UTC: `created: '2026-06-08T16:00:00Z'`.
 - **Control tags** live in the `tags:` list with a `vault:` prefix: `vault:pin` (keep forever),
   `vault:skip` (never ingest), `vault:promote` (eligible for promotion into the wiki).
+
+### 3.5 Toolkit: skill categories & naming conventions
+
+Kit skills live in **real category folders**: `toolkit/skills/<NN-category>/<name>.md`. The taxonomy:
+
+| # | Category | Status | Holds |
+|---|---|---|---|
+| 01 | `01-foundations` | active | `vault-init`, `obsidian-setup`, `profile-build`, `pokevault-update` |
+| 02 | `02-research` | active | `research-init`, `research-promote` |
+| 03 | `03-communication` | reserved | — |
+| 04 | `04-project-management` | reserved | — |
+| 05 | `05-development` | reserved | — |
+| 06 | `06-design` | reserved | — |
+| 07 | `07-authoring` | reserved | — |
+| 08 | `08-knowledge` | active | `wiki-ingest`, `wiki-lint`, `daily-note` |
+
+Conventions:
+
+- **Numbers are stable; never renumber.** Reserved categories get a folder only when first used.
+- **Naming:** `{area}-{action}` (e.g., `wiki-ingest`, `research-promote`).
+- **Identity:** file name == skill `name:` frontmatter == wired `.claude/skills/<name>/` folder.
+- **`version` (semver) lives in frontmatter** — the authoritative datapoint for invoke/update/cleanup.
+  Versions never appear in file or folder names. `category:` must equal the folder the skill lives in.
+- **Categories organize the source tree only; they do NOT propagate to runtimes.** The bootstrap
+  flatten preserves the flat `.claude/skills/<name>/SKILL.md` contract every non-Quick tool expects.
 
 ---
 

@@ -48,7 +48,7 @@ The folder name (`PokeVault`) becomes the Obsidian vault display name. Rename if
 > ```
 >
 > Pass a path to install elsewhere: `./bootstrap.sh ~/Knowledge`. It's safe to re-run (idempotent) and
-> never overwrites your content. Or build from scratch with your assistant: open `skills/vault-init.md`
+> never overwrites your content. Or build from scratch with your assistant: open `skills/01-foundations/vault-init.md`
 > and say "initialize my vault at ~/PokeVault".
 
 ---
@@ -98,12 +98,12 @@ Point your assistant at the schema. It's the same schema for every tool — only
 
 ### How your skills are wired
 `bootstrap.sh` installs the kit's skills in two shapes so every tool can find them:
-- **Canonical source** — `~/PokeVault/toolkit/skills/<name>.md` (plain Markdown, readable by any agent).
+- **Canonical source** — `~/PokeVault/toolkit/skills/<NN-category>/<name>.md` (plain Markdown, readable by any agent).
 - **Claude Code** — `~/PokeVault/.claude/skills/<name>/SKILL.md` (the open Agent-Skills format; one folder
   per skill, `SKILL.md` singular). Claude auto-loads a skill when your request matches its
   `description`. Just open `~/PokeVault` as the project.
 - **Codex / Cursor / Gemini / Aider / Windsurf / Zed** — these read `AGENTS.md` natively; the skill
-  catalog + trigger phrases live in **AGENTS.md §11**, so the agent opens `toolkit/skills/<name>.md`
+  catalog + trigger phrases live in **AGENTS.md §11**, so the agent opens `toolkit/skills/<category>/<name>.md`
   on demand.
 - **Want skills available everywhere in Claude Code?** Copy the `<name>/` folders from
   `~/PokeVault/.claude/skills/` to `~/.claude/skills/` (personal scope) instead of leaving them in-vault.
@@ -143,7 +143,7 @@ Then test:
 ## 6. Updating later (without losing data)
 
 When a newer PokeVault release ships, you can deploy its improvements **into** your existing vault
-without disturbing your content. The rules are binding (`skills/pokevault-update.md`):
+without disturbing your content. The rules are binding (`skills/01-foundations/pokevault-update.md`):
 
 - **Overwritten** (with a backup to `.vault/_backup/<version>/`): the engine (`AGENTS.md`), harness
   pointers, shipped docs, and reference templates.

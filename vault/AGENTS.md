@@ -44,7 +44,7 @@ This vault contains four zones plus one shared daily note:
 | Second Brain | `second-brain/` | Cognitive fingerprint (who you are) + personal knowledge wiki | Private |
 | Work | `work/` | Engagement/project notes + work knowledge wiki | Private |
 | Personal | `personal/` | Life management — people (CRM), areas, goals, calendar + a personal-knowledge wiki | Private |
-| Toolkit | `toolkit/` | Your own skills, agents, context files (no wiki) | Private |
+| Toolkit | `toolkit/` | Your own skills (by category), agents, agent-sops (multi-step procedures), context files (no wiki) | Private |
 
 A single **daily note** at the vault root (`daily/`) is the shared capture surface for *both* work
 and personal — see "The single daily note" below.
@@ -587,7 +587,10 @@ work/records/
 work/artifacts/
 work/wiki/raw/{inbox,meetings,notes,media,processed,_archive}/
 work/wiki/pages/{sources,entities,concepts,synthesis,references}/
-toolkit/{skills,agents,context}/
+toolkit/skills/<NN-category>/        ← skills organized by category (01-foundations … 08-knowledge); file name == skill name
+toolkit/agents/
+toolkit/agent-sops/                  ← multi-step agent procedures (SOPs)
+toolkit/context/
 personal/people/
 personal/areas/
 personal/goals/
@@ -614,24 +617,27 @@ scratch/    ← transient staging
 
 ## 11. Skills (reusable workflows)
 
-Skills are plain-Markdown workflows. The tool-neutral source lives in `toolkit/skills/<name>.md`;
-the kit's `bootstrap.sh` / `bootstrap.ps1` mirrors each into `.claude/skills/<name>/SKILL.md` so
-Claude Code auto-discovers them (open Agent-Skills standard). Any agent that reads this file can run
-one by opening its source file when you say the trigger phrase.
+Skills are plain-Markdown workflows. The tool-neutral source lives in
+`toolkit/skills/<NN-category>/<name>.md` (categories organize the source tree only — they do **NOT**
+propagate to runtimes); the kit's `bootstrap.sh` / `bootstrap.ps1` recurses the category dirs and
+**flattens** each skill into `.claude/skills/<name>/SKILL.md` so Claude Code auto-discovers them
+(open Agent-Skills standard). Each skill carries a `version` (semver) in its frontmatter — the
+authoritative datapoint for invoke/update/cleanup; versions never appear in file or folder names.
+Any agent that reads this file can run one by opening its source file when you say the trigger phrase.
 
-| Skill | Trigger phrase | Purpose |
-|---|---|---|
-| `vault-init` | "initialize my vault" | Scaffold or repair the vault structure (idempotent) |
-| `wiki-ingest` | "process my inbox" | Compile raw sources into wiki pages (dedup, route, link, log) |
-| `wiki-lint` | "lint my wiki" | Health checks + safe auto-fixes |
-| `daily-note` | "open today's note" | Daily capture front door + end-of-day routing |
-| `obsidian-setup` | "set up obsidian" | Install/verify plugins + link settings |
-| `profile-build` | "build my profile" | Populate the second-brain profile conversationally |
-| `pokevault-update` | "update my vault" | Apply a kit update non-destructively |
-| `research-init` | "start research <name>" | Scaffold a new research project from the template |
-| `research-promote` | "promote research" / "promote this" | Compile a ready finding/component into the wiki (frontmatter-driven) |
+| Skill | Category | Trigger phrase | Purpose |
+|---|---|---|---|
+| `vault-init` | `01-foundations` | "initialize my vault" | Scaffold or repair the vault structure (idempotent) |
+| `obsidian-setup` | `01-foundations` | "set up obsidian" | Install/verify plugins + link settings |
+| `profile-build` | `01-foundations` | "build my profile" | Populate the second-brain profile conversationally |
+| `pokevault-update` | `01-foundations` | "update my vault" | Apply a kit update non-destructively |
+| `research-init` | `02-research` | "start research <name>" | Scaffold a new research project from the template |
+| `research-promote` | `02-research` | "promote research" / "promote this" | Compile a ready finding/component into the wiki (frontmatter-driven) |
+| `wiki-ingest` | `08-knowledge` | "process my inbox" | Compile raw sources into wiki pages (dedup, route, link, log) |
+| `wiki-lint` | `08-knowledge` | "lint my wiki" | Health checks + safe auto-fixes |
+| `daily-note` | `08-knowledge` | "open today's note" | Daily capture front door + end-of-day routing |
 
-**Invocation without a skills-aware harness:** "Read `toolkit/skills/<name>.md` and follow it."
+**Invocation without a skills-aware harness:** "Read `toolkit/skills/<category>/<name>.md` and follow it."
 
 ---
 

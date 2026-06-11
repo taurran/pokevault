@@ -83,7 +83,7 @@ Full, detailed walkthrough (sync/backup, troubleshooting, updates): **`INSTALL.m
 ## What the bootstrap does
 
 1. Copies the `vault/` into a local folder — `~/PokeVault` (`C:\PokeVault` on Windows) — skipping if one already exists (never clobbers your data).
-2. Installs the kit's skills to `~/PokeVault/toolkit/skills/<name>.md` (tool-neutral source).
+2. Installs the kit's skills to `~/PokeVault/toolkit/skills/<NN-category>/<name>.md` (tool-neutral source, organized by category).
 3. Generates **Claude Code** skill bindings at `~/PokeVault/.claude/skills/<name>/SKILL.md` (the open
    Agent-Skills format — one folder per skill).
 4. Confirms the engine (`AGENTS.md`) and per-tool pointers are in place.
@@ -173,7 +173,7 @@ finding is solid, *"promote research"* compiles it into the curated wiki with fu
 ## The skills
 
 Nine tool-neutral skills ship in `skills/` and install into your vault. Trigger them by phrase, or tell
-any assistant *"Read `toolkit/skills/<name>.md` and follow it."*
+any assistant *"Read `toolkit/skills/<category>/<name>.md` and follow it."*
 
 | Skill | Say | What it does |
 |---|---|---|
@@ -194,7 +194,7 @@ any assistant *"Read `toolkit/skills/<name>.md` and follow it."*
 Your assistant follows seven **anti-forgetting rules** (`AGENTS.md` §4): append don't rewrite, verify
 against sources, search before create, flag contradictions, provenance on every claim, one canonical
 page per entity, raw is immutable. And every future **update deploys *into* your vault without touching
-your data** (`skills/pokevault-update.md`).
+your data** (`skills/01-foundations/pokevault-update.md`).
 
 ## Updating later
 Pull a newer release and re-run `./bootstrap.sh` — it adds new structure and re-syncs skills without

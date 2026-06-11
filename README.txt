@@ -61,7 +61,7 @@ INSTALL (about 60 seconds)
 WHAT THE BOOTSTRAP DOES
 ------------------------------------------------------------------------------
 1. Copies vault/ to ~/PokeVault (skips if one exists - never clobbers your data).
-2. Installs skills to ~/PokeVault/toolkit/skills/<name>.md (tool-neutral source).
+2. Installs skills to ~/PokeVault/toolkit/skills/<NN-category>/<name>.md (tool-neutral source, by category).
 3. Generates Claude Code bindings at ~/PokeVault/.claude/skills/<name>/SKILL.md.
 4. Confirms the engine (AGENTS.md) and per-tool pointers are in place.
 
